@@ -1,14 +1,11 @@
 <?php
 use setasign\FpdiProtection\FpdiProtection;
-
 require_once '../vendor/autoload.php';
 $nomfile='';// fichier pdf
 if(isset($_POST['filePdf'])){
 
     $nomfile='../document/'.$_POST['filePdf'];
 }
-
-
 
 
 $orientation = 'L';           // orientation du pdf L (landscapre) paysage sinon P (portrait)
@@ -44,8 +41,9 @@ while($i <= $p) {
 
 
 }
-$ownerPassword = $pdf->setProtection('',null,3);
+$ownerPassword = $pdf->setProtection( FpdiProtection::PERM_MODIFY, 'a', null, 3);
 //var_dump($ownerPassword);
+
 //show the PDF in page
-//$pdf->Output('aldex'.$nomfile, 'D');
-$pdf->Output();
+$pdf->Output('aldex'.$nomfile, 'D');
+//$pdf->Output();
